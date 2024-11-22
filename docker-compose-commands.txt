@@ -1,0 +1,5 @@
+# Builds the Docker images (if necessary) and starts all services (containers) as defined in the docker-compose.yml file.
+docker-compose up --build
+
+# Stops and removes the containers, networks, and volumes created by docker-compose, cleaning up all persistent data.
+docker-compose down -v
