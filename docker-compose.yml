@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # PostgreSQL service (private network)
+  postgres:
+    build:
+      context: .
+      dockerfile: Database\Dockerfile  # This will build the second Dockerfile
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: divyansh
+      POSTGRES_DB: weather
+    networks:
+      - private_network
+    ports:
+      - "5432:5432"  # Expose PostgreSQL on port 5432 for host machine access
+
+  # FastAPI app service (public network)
+  microservice1-app:
+    build:
+      context: .
+      dockerfile: Microservice_01\Dockerfile  # This will build the first Dockerfile
+    depends_on:
+      - postgres  # Ensure postgres is up before FastAPI app starts
+    environment:
+      DATABASE_URL: postgresql://root:divyansh@postgres:5432/weather
+    networks:
+      - public_network
+      - private_network  # Connect to both public and private networks
+    ports:
+      - "8001:8000"  # Expose FastAPI app on port 8000 for public access
+  
+  microservice2-app:
+    build:
+      context: .
+      dockerfile: Microservice_02\Dockerfile  # This will build the first Dockerfile
+    depends_on:
+      - postgres  # Ensure postgres is up before FastAPI app starts
+    environment:
+      DATABASE_URL: postgresql://root:divyansh@postgres:5432/aqi
+    networks:
+      - public_network
+      - private_network  # Connect to both public and private networks
+    ports:
+      - "8002:8000"  # Expose FastAPI app on port 8000 for public access
+
+# Define networks
+networks:
+  private_network:
+    driver: bridge
+  public_network:
+    driver: bridge

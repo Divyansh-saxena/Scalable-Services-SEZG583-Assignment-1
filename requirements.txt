@@ -1,0 +1,6 @@
+fastapi
+sqlalchemy
+asyncpg
+pydantic
+uvicorn
+python-dateutil

@@ -1,0 +1,56 @@
+1. Create Weather Data (POST /weather/)
+curl -X 'POST' \
+  'http://localhost:8001/weather/' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "city": "New York",
+  "temperature": 22.5,
+  "humidity": 60.0,
+  "recorded_at": "2024-11-22 13:30:00"
+}'
+
+2. Read Latest Weather Data (GET /weather/)
+curl -X 'GET' \
+  'http://localhost:8001/weather/'
+
+3. Read Weather Data for a Specific Date (GET /weather/?date=2024-11-22)
+curl -X 'GET' \
+  'http://localhost:8001/weather/?date=2024-11-22'
+
+4. Delete Weather Data for a Specific Date (DELETE /weather/{date})
+curl -X 'DELETE' \
+  'http://localhost:8001/weather/2024-11-22'
+
+5. Get Average Temperature (GET /weather/avg_temp)
+curl -X 'GET' \
+  'http://localhost:8001/weather/avg_temp'
+
+6. Get Average Humidity (GET /weather/avg_humidity)
+curl -X 'GET' \
+  'http://localhost:8001/weather/avg_humidity'
+
+7. Create AQI Data (POST /aqi/)
+curl -X 'POST' \
+  'http://localhost:8002/aqi/' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "city": "New York",
+  "aqi": 45,
+  "recorded_at": "2024-11-22 13:30:00"
+}'
+
+8. Read Latest AQI Data (GET /aqi/)
+curl -X 'GET' \
+  'http://localhost:8002/aqi/'
+
+9. Read AQI Data for a Specific Date (GET /aqi/?date=2024-11-22)
+curl -X 'GET' \
+  'http://localhost:8002/aqi/?date=2024-11-22'
+
+10. Delete AQI Data for a Specific Date (DELETE /aqi/{date})
+curl -X 'DELETE' \
+  'http://localhost:8002/aqi/2024-11-22'
+
+11. Get Average AQI in the Last 7 Days (GET /aqi/avg_aqi)
+curl -X 'GET' \
+  'http://localhost:8002/aqi/avg_aqi'
